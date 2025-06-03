@@ -47,18 +47,26 @@ Based on a research paper by Yang. et al. in 2020 titled [Lunar impact crater id
 ## Training the model
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To evaluate the hybrid model before scaling to full training, we varied the model's hyperparameters by performing 1 epoch mini trials. As shown in Table 1 (below), we varied the dropout rate, learning rate, hidden layer sizes, and feed forward parameters to land on a few models that performed the best. Although these results would likely vary drastically for full training, these tests helped us narrow down our hyperparameters choices to a few models that we were confident in to focus our resources towards for the upcoming trials. Additional tests were also done with 5 and 10 epochs on the most successful hyperparameter choices.
 
-Table 1: Results for the 1-epoch mini trials. Values changed were parameters, dropout rate, and learning rate. Values recorded were loss function, accuracy of training data, and accuracy of test data. 
+<img src="https://github.com/EvanC8/Lunar-Crater-Age-Classification/blob/main/performance_images/model-fitting.png?raw=true" height="150">
+
+> **Table 1:** Results for the 1-epoch mini trials. Values changed were parameters, dropout rate, and learning rate. Values recorded were loss function, accuracy of training data, and accuracy of test data. 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For instance, we noticed that when adding more crater parameters to the feedforward design, the train and test accuracies fell significantly. We suspect that this was due to two reasons: Firstly, including additional parameters led the hybrid model to overtrain on the feedforward side, paying less significance to the CNN output. Secondly, we found that many of the metadata stored on each crater were redundant and even proportional to an extent, like the depth of a crater compared to its cavity height. Thus, we found that restricting the feed forward network to one or two parameters like radius and depth were sufficient to train our hybrid model without overfitting on redundant, potentially unnecessary feedforward parameters.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Once the desired hyperparameters were chosen, we were ready to begin training. Our data was randomly split 80/20 into training and test data, and we performed 100 epochs on our model. After each epoch, we saved the current model and evaluated for accuracy on both training and test data. Because of our limited dataset, our model began to overfit around 40 epochs, so we stopped training after that point. Our best model was able to perform with an accuracy of 62% on our test data, see Figure 1 (Below).
+
+<img src="https://github.com/EvanC8/Lunar-Crater-Age-Classification/blob/main/performance_images/hybrid_best.png?raw=true" width="500">
+
+> **Figure 1:** Results from best hybrid model. The model begins to overtrain around epoch 40, causing a downward trend in test accuracy. The best model had a test accuracy of 62%. 
 
 ## Analysis of results/Future endeavors
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The limitations of our model were largely due to our dataset. This caps how long we can train it for. Our biggest issue was the implementation of dropout, allowing the model to train further without worry of overfitting. Upon using non-zero dropout rates, the model would converge to predicting Nectarian for every crater. We believe that the significant imbalance between crater age categories contributed to this result. This issue was eventually resolved, delaying overfitting of our model by around 20 epochs or more in most cases. 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Furthermore, we wished to compare the accuracy of our models with larger changes. Specifically, compared the CNN image classifier by itself, without numerical attributes from the FFN. This model was able to work with dropout, producing our highest test accuracy of 63.5%, see Figure 2 (below). This would suggest that the chosen numerical attributes, plugged into our Feedforward network, hinder the ability of our classifier to accurately predict crater ages. 
 
-Figure 2: Results from the CNN into Classifier model, without input from the FFN.. This non-hybrid model produces our best test accuracy of 63.5%, without discernible overtraining. 
+<img src="https://github.com/EvanC8/Lunar-Crater-Age-Classification/blob/main/performance_images/cnn_best.png?raw=true" width="500">
+
+> **Figure 2:** Results from the CNN into Classifier model, without input from the FFN.. This non-hybrid model produces our best test accuracy of 63.5%, without discernible overtraining. 
  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When we tested the system using only the FFN, we found that regardless of hyperparameters used, the system would only ever output every crater as being from class 1 (Nectarian, the most common class). This suggests that the data we are feeding the system via the FFN is negligible in providing any information about the crater’s age, as does the increased accuracy of the CNN-only model. Scientifically this is likely due to the fact that impactors will cause similarly quantitative values for craters regardless of age over a certain size. The CNN is effective in that it looks for the qualitative effects that erosion-like processes and ejecta covering would have on craters over billions of years. As for why Yang et al.’s FFN-hybrid model was effective, it likely has to do with the size of craters we used. Their dataset included many smaller craters which fade at a faster rate than larger ones. Since our dataset is composed of only relatively large craters, that factor is not useful for our identification.
 
