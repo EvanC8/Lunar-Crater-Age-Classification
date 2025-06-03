@@ -13,7 +13,7 @@ Based on a research paper by Yang. et al. in 2020 titled [Lunar impact crater id
         <li><a href="#Description-of-Dataset">Description of dataset</a></li>
         <li><a href="#Description-of-Our-Model">Description of our model</a></li>
         <li><a href="#Training-The-Model">Training the model</a></li>
-        <li><a href="#Analysis-of-results/Future-endeavors">Analysis of results/Future endeavors</a></li>
+        <li><a href="#Analysis-of-results-and-future-endeavors">Analysis of results and future endeavors</a></li>
       </ul>
     </li>
     <li><a href="#next-steps">Next Steps</a></li>
@@ -59,7 +59,7 @@ Based on a research paper by Yang. et al. in 2020 titled [Lunar impact crater id
 
 > **Figure 1:** Results from best hybrid model. The model begins to overtrain around epoch 40, causing a downward trend in test accuracy. The best model had a test accuracy of 62%. 
 
-## Analysis of results/Future endeavors
+## Analysis of results and future endeavors
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The limitations of our model were largely due to our dataset. This caps how long we can train it for. Our biggest issue was the implementation of dropout, allowing the model to train further without worry of overfitting. Upon using non-zero dropout rates, the model would converge to predicting Nectarian for every crater. We believe that the significant imbalance between crater age categories contributed to this result. This issue was eventually resolved, delaying overfitting of our model by around 20 epochs or more in most cases. 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Furthermore, we wished to compare the accuracy of our models with larger changes. Specifically, compared the CNN image classifier by itself, without numerical attributes from the FFN. This model was able to work with dropout, producing our highest test accuracy of 63.5%, see Figure 2 (below). This would suggest that the chosen numerical attributes, plugged into our Feedforward network, hinder the ability of our classifier to accurately predict crater ages. 
