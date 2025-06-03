@@ -1,4 +1,3 @@
-# Moon Crater Image
 # Converted from a Google Colab file
 
 import torch
