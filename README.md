@@ -8,12 +8,12 @@ Based on a research paper by Yang. et al. in 2020 titled [Lunar impact crater id
   <ol>
     <li>
       <ul>
-        <li><a href="##Introduction">Introduction</a></li>
-        <li><a href="##Research-Paper-Review">Research paper review</a></li>
-        <li><a href="##Description-of-Dataset">Description of dataset</a></li>
-        <li><a href="##Description-of-Our-Model">Description of our model</a></li>
-        <li><a href="##Training-The-Model">Training the model</a></li>
-        <li><a href="##Analysis-of-results/Future-endeavors">Analysis of results/Future endeavors</a></li>
+        <li><a href="#Introduction">Introduction</a></li>
+        <li><a href="#Research-Paper-Review">Research paper review</a></li>
+        <li><a href="#Description-of-Dataset">Description of dataset</a></li>
+        <li><a href="#Description-of-Our-Model">Description of our model</a></li>
+        <li><a href="#Training-The-Model">Training the model</a></li>
+        <li><a href="#Analysis-of-results/Future-endeavors">Analysis of results/Future endeavors</a></li>
       </ul>
     </li>
     <li><a href="#next-steps">Next Steps</a></li>
